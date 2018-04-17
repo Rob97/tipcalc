@@ -6,6 +6,10 @@ import android.widget.Button
 import android.widget.Toast
 import android.view.View
 import android.widget.EditText
+import android.text.Editable
+import android.text.TextWatcher
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +23,21 @@ class MainActivity : AppCompatActivity() {
 
         //Set a handler for amountRef to enable the tip button when it has good input
         // amountRef.
+        amountRef.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(arg0: Editable) {
+                if(amountRef.getText().toString().length > 0){
+                    button.setEnabled(true)
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
+
+
+
+
         button.setOnClickListener({view ->
             val amount:Double = (amountRef.getText().toString().toDouble())
             val TipDue:Double = TipCalc(amount);
