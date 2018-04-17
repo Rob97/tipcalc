@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.text.Editable
 import android.text.TextWatcher
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.DecimalFormat
 import java.text.NumberFormat
 
 
@@ -73,6 +74,7 @@ amountRef.setRawInputType(Configuration.KEYBOARD_12KEY);
 
 
         button.setOnClickListener({view ->
+            val df = DecimalFormat("0.00")
             var amountString:String = (amountRef.getText().toString().replace(("[$,.]").toRegex(), ""))
             var amount:Double = java.lang.Double.parseDouble(amountString) /100
             var TipCalculated = (TipCalc(amount));
@@ -88,7 +90,7 @@ amountRef.setRawInputType(Configuration.KEYBOARD_12KEY);
 
            // var TipDue:Long = Math.round((TipCalc(amount)*100))/100
 
-            var toast = Toast.makeText(applicationContext, "$"+TipDue, Toast.LENGTH_LONG);
+            var toast = Toast.makeText(applicationContext, "$"+df.format(TipDue), Toast.LENGTH_LONG);
                 toast.show()
 
         })
